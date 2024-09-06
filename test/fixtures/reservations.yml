@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  table: one
+  reservation_time: 2024-09-07 05:33:22
+  guest_name: MyString
+  guest_phone: 1
+
+two:
+  table: two
+  reservation_time: 2024-09-07 05:33:22
+  guest_name: MyString
+  guest_phone: 1
