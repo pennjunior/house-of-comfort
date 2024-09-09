@@ -3,5 +3,5 @@ class Table < ApplicationRecord
   has_many :reservations
 
   validates :number, presence: true
-  validates :capacity, presense: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end
