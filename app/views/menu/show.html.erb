@@ -1,0 +1,4 @@
+<h1>Proceed To Order from <%= @menu_item.category %> Foods</h1>
+  <strong>Name: <%= @menu_item.name %></strong>
+  <p>Price:<%= @menu_item.price %></p>
+  <%= link_to "Back to Category", menu_category_path(@menu_item.category) %>

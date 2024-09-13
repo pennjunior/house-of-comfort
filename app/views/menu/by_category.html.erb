@@ -1,0 +1,15 @@
+<h1>Menu Items for <%= @category %> Foods</h1>
+<p>Available on the menu are</p>
+<% if @menu_items.any? %>
+  <ul>
+    <% @menu_items.each do |item| %>
+      <li>
+        <strong><%= link_to item.name, menu_item_path(item)%></strong> - <p><%= (item.price) %>CFA</p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No items available in this category.</p>
+<% end %>
+
+<%= link_to "Back to All Categories", menu_category_path %>

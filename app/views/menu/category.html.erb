@@ -1,0 +1,10 @@
+<h1>Welcome to House of Comfort</h1>
+
+<h2>Select A Category</h2>
+
+<% @categories.each do |category, items| %>
+  <h3>
+    <ul>
+      <li><%= link_to category.capitalize, menu_by_category_path(category: category) %></h3></li>
+    </ul>
+<% end %>
