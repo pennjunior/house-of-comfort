@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'menu/:id/edit', to: 'menu#edit', as: 'menu_edit'
 
   patch 'menu/:id', to: 'menu#update', as: 'update_menu'
-  put 'menu/:id', to: 'menu#update'
+  delete 'menu/:id', to: 'menu#destroy'
 
   get 'menu/:id', to: 'menu#show', as: 'menu_item'
   get "pages/gallery", to: "pages#gallery"

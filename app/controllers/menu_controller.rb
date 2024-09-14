@@ -1,7 +1,6 @@
 class MenuController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
-
   def category
     @categories = MenuItem.all.group_by(&:category)
   end
@@ -22,8 +21,6 @@ class MenuController < ApplicationController
     if @menu_item.save
       redirect_to menu_item_path(@menu_item), notice: 'Menu item was successfully created.'
     else
-      puts @menu_item.errors.full_messages
-      flash.now[:alert] = @menu_item.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -32,11 +29,18 @@ class MenuController < ApplicationController
   end
 
   def update
-    @menu_item = MenuItem.update(menu_item_params)
+    @menu_item = MenuItem.find(params[:id])
+    if @menu_item.update(menu_item_params)
+      redirect_to menu_item_path(@menu_item), notice: 'Menu item was successfully created.'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @menu_item =  MenuItem.destroy
+    @menu_item = MenuItem.find(params[:id])
+    @menu_item.destroy
+    redirect_to menu_category_path(@menu_item.category)
   end
 
   private
