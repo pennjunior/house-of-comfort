@@ -1,5 +1,6 @@
 class MenuController < ApplicationController
-  before_action :set_params, only: [:create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create]
+
 
   def category
     @categories = MenuItem.all.group_by(&:category)
@@ -17,7 +18,14 @@ class MenuController < ApplicationController
   end
 
   def create
-    @menu_item = MenuItem.new(menu_item_params)
+    @menu_item = current_user.menu_items.build(menu_item_params)
+    if @menu_item.save
+      redirect_to menu_item_path(@menu_item), notice: 'Menu item was successfully created.'
+    else
+      puts @menu_item.errors.full_messages
+      flash.now[:alert] = @menu_item.errors.full_messages.to_sentence
+      render :new
+    end
   end
   def edit
     @menu_item = MenuItem.find(params[:id])
@@ -34,6 +42,10 @@ class MenuController < ApplicationController
   private
 
   def menu_item_params
-    params.require(:menu_item).permit(:name, :price, :category, :user)
+    params.require(:menu_item).permit(:name, :price, :category)
   end
+
+  # def authenticate_user!
+  #   redirect_to new_user_session_path unless user_signed_in?
+  # end
 end
