@@ -31,7 +31,7 @@ class MenuController < ApplicationController
   def update
     @menu_item = MenuItem.find(params[:id])
     if @menu_item.update(menu_item_params)
-      redirect_to menu_item_path(@menu_item), notice: 'Menu item was successfully created.'
+      redirect_to menu_item_path(@menu_item), notice: 'Successfully Updated.'
     else
       render :edit
     end
@@ -46,7 +46,7 @@ class MenuController < ApplicationController
   private
 
   def menu_item_params
-    params.require(:menu_item).permit(:name, :price, :category)
+    params.require(:menu_item).permit(:name, :price, :category, :photo)
   end
 
   # def authenticate_user!
