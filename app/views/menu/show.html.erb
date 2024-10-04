@@ -4,7 +4,7 @@
     <%= cl_image_tag @menu_item.photo.key, height: 300, width: 400, crop: :fill %>
     <div class="card-body">
       <p>Title: <strong><%= @menu_item.name %></strong></p>
-      <p>Cost: <%= @menu_item.price %></p>
+      <p>Cost: <%= @menu_item.price %>CFA</p>
     </div>
   </div>
     <%= link_to "Edit Item", menu_edit_path(@menu_item), class: "btn btn-primary" %>

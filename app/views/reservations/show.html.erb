@@ -1,2 +1,14 @@
 <h1>Reservations#show</h1>
-<p>Find me in app/views/reservations/show.html.erb</p>
+<div class="col-md-7">
+  <% @reservations.each do |reserved| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Name: #<%= reserved.guest_name %></h5>
+        <p class="card-text">Phone: <%= reserved.guest_phone %> </p>
+        <p class="card-text">Time and date: <%= reserved.reservation_time.strftime("%B %d, %Y %H:%M") %> </p>
+        <p class="card-text">Time and date: <%= reserved.status%> </p>
+        <p class="card-text">Table Number: <%= reserved.table.number %> </p>
+      </div>
+    </div>
+  <% end %>
+</div>

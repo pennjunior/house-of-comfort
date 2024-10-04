@@ -3,6 +3,7 @@
 <% if @menu_items.any? %>
   <ul>
     <% @menu_items.each do |item| %>
+
       <li>
         <strong><%= link_to item.name, menu_item_path(item)%></strong> - <p><%= (item.price) %>CFA</p>
       </li>

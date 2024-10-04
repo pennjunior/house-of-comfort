@@ -1,5 +1,6 @@
 class MenuController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_params, only: [:show, :edit, :update, :destroy]
 
   def category
     @categories = MenuItem.all.group_by(&:category)
@@ -10,7 +11,6 @@ class MenuController < ApplicationController
     @menu_items = MenuItem.where(category: @category)
   end
   def show
-    @menu_item = MenuItem.find(params[:id])
   end
   def new
     @menu_item = MenuItem.new
@@ -25,11 +25,9 @@ class MenuController < ApplicationController
     end
   end
   def edit
-    @menu_item = MenuItem.find(params[:id])
   end
 
   def update
-    @menu_item = MenuItem.find(params[:id])
     if @menu_item.update(menu_item_params)
       redirect_to menu_item_path(@menu_item), notice: 'Successfully Updated.'
     else
@@ -38,7 +36,6 @@ class MenuController < ApplicationController
   end
 
   def destroy
-    @menu_item = MenuItem.find(params[:id])
     @menu_item.destroy
     redirect_to menu_category_path(@menu_item.category)
   end
@@ -47,6 +44,10 @@ class MenuController < ApplicationController
 
   def menu_item_params
     params.require(:menu_item).permit(:name, :price, :category, :photo)
+  end
+
+  def set_params
+    @menu_item = MenuItem.find(params[:id])
   end
 
   # def authenticate_user!

@@ -1,2 +1,47 @@
-<h1>Reservations#new</h1>
-<p>Find me in app/views/reservations/new.html.erb</p>
+<div class="container">
+  <h1>Make a Reservation</h1>
+  <div class="row">
+    <!-- Display the list of tables -->
+    <div class="col-md-7">
+      <% @tables.each do |table| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Table: #<%= table.number %></h5>
+            <p class="card-text">Capacity: <%= table.capacity %> guests</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Reservation Form -->
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <%= simple_form_for @reservation, url: reservations_path, html: { class: 'form-control' } do |f| %>
+
+            <div class="form-group">
+              <%= f.input :guest_name, label: 'Guest Name', input_html: { class: 'form-control' } %>
+            </div>
+
+            <div class="form-group">
+              <%= f.input :guest_phone, label: 'Guest Phone', input_html: { class: 'form-control' } %>
+            </div>
+
+            <div class="form-group">
+              <%= f.association :table, collection: @tables, label_method: :number, value_method: :id, prompt: 'Select a Table', label: 'Table', input_html: { class: 'form-control' } %>
+            </div>
+
+            <div class="form-group">
+              <%= f.input :reservation_time, as: :datetime, label: 'Reservation Time', required: true, input_html: { class: 'form-control' } %>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit 'Reserve Table', class: 'btn btn-primary btn-block' %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
